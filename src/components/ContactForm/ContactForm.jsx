@@ -15,7 +15,7 @@ const ContactForm = () => {
     const existingName = phones.some(
       item => item.name.toLowerCase() === name.toLowerCase()
     );
-    const existingNumber = phones.find(item => item.number === Number(number));
+    const existingNumber = phones.find(item => item.number === number);
 
     if (existingName) {
       return alert(`Contact "${name}" is already in contacts list`);
@@ -23,7 +23,7 @@ const ContactForm = () => {
       return alert(`Number "${number}" is already in contacts list`);
     }
 
-    dispatch(addPhone(name, Number(number)));
+    dispatch(addPhone(name, number));
     setName('');
     setNumber('');
   };

@@ -8,7 +8,7 @@ export const ContactItem = styled.ul`
   border-radius: 5px;
   padding: 2px;
   padding-left: 5px;
-  width: 350px;
+  width: 450px;
   justify-content: space-between;
   background-color: beige;
 `;
