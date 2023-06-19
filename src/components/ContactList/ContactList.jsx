@@ -2,7 +2,7 @@ import ContactListItem from 'components/ContactListItem/ContactListItem';
 import { ContactListStyle } from './ContactList.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectFilter, selectPhones } from 'redux/selector';
-import { deletePhone } from 'redux/phoneSlice';
+import { deleteContact } from 'redux/operations';
 
 const ContactList = () => {
   const dispatch = useDispatch();
@@ -21,7 +21,7 @@ const ContactList = () => {
             id={id}
             contactName={name}
             contactNumber={phone}
-            onClick={() => dispatch(deletePhone(id))}
+            onClick={() => dispatch(deleteContact(id))}
           />
         );
       })}

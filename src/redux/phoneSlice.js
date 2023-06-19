@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchContacts } from "./operations";
+import { addContact, deleteContact, fetchContacts } from "./operations";
 
 const initialState = {
   items: [],
@@ -26,10 +26,20 @@ const handleFetchContactsFulfilled = (state, { payload }) => {
   state.error = null;
   state.isLoading = false
 }
-// const handleFulfilledContactsDetails = (state, { payload }) => {
-//   state.isLoading = false
-//   state.productDetails = payload
-// }
+
+const handleAddContactFulfilled = (state, { payload }) => {
+  state.items.push(payload)
+  state.error = null;
+  state.isLoading = false
+}
+
+const handleDeleteContactFulfilled = (state, { payload }) => {
+  const index = state.items.findIndex(phone => phone.id === payload);
+  state.items.splice(index, 1);
+  state.error = null;
+  state.isLoading = false
+}
+
 
 const phoneSlice = createSlice({
   name: "phones",
@@ -37,6 +47,8 @@ const phoneSlice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(fetchContacts.fulfilled, handleFetchContactsFulfilled,)
+      .addCase(addContact.fulfilled, handleAddContactFulfilled)
+      .addCase(deleteContact.fulfilled, handleDeleteContactFulfilled)
       .addMatcher(pendingAction, handlePending)
       .addMatcher(rejectedAction, handleRejected)
   },
@@ -44,24 +56,3 @@ const phoneSlice = createSlice({
 
 export const { addPhone, deletePhone } = phoneSlice.actions;
 export const phoneReducer = phoneSlice.reducer;
-
-// reducers: {
-//   addPhone: {
-//     reducer(state, action) {
-//       state.push(action.payload);
-//     },
-//     prepare(name, number) {
-//       return {
-//         payload: {
-//           id: nanoid(),
-//           name,
-//           number
-//         },
-//       };
-//     },
-//   },
-//   deletePhone(state, action) {
-//     const index = state.findIndex(phone => phone.id === action.payload);
-//     state.splice(index, 1);
-//   },
-// },
