@@ -34,7 +34,7 @@ const handleAddContactFulfilled = (state, { payload }) => {
 }
 
 const handleDeleteContactFulfilled = (state, { payload }) => {
-  const index = state.items.findIndex(phone => phone.id === payload);
+  const index = state.items.findIndex(phone => phone.id === payload.id);
   state.items.splice(index, 1);
   state.error = null;
   state.isLoading = false
